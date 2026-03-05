@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class LikeService {
 
@@ -23,7 +24,6 @@ public class LikeService {
         this.postLikeRepository = postLikeRepository;
     }
 
-    @Transactional
     public void likePost(String token, Long postId) {
 
         User user = authService.validateToken(token);
@@ -36,8 +36,8 @@ public class LikeService {
         }
 
         PostLike like = new PostLike();
-        like.setLikedBy(user);
-        like.setLikedPost(post);
+        like.setLikedBy(user);  //Hangi kullanıcının beğendiği yazar
+        like.setLikedPost(post);  //Hangi postu beğendiği yazar
 
         postLikeRepository.save(like);
 
@@ -45,7 +45,6 @@ public class LikeService {
         postRepository.save(post);
     }
 
-    @Transactional
     public void unlikePost(String token, Long postId) {
 
         User user = authService.validateToken(token);

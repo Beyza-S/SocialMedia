@@ -4,6 +4,7 @@ import com.beyzasoy.socialmedia.entity.Role;
 import com.beyzasoy.socialmedia.entity.User;
 import com.beyzasoy.socialmedia.repository.UserRepository;
 import com.beyzasoy.socialmedia.service.PasswordService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,16 +20,22 @@ public class AdminSeeder implements CommandLineRunner {
         this.passwordService = passwordService;
     }
 
-    @Override
-    public void run(String... args) {
+    @Value("${app.admin.username}")
+    private String adminUsername;
 
-        if (userRepository.existsByUsername("admin")) {
+    @Value("${app.admin.password}")
+    private String adminPassword;
+
+    @Override
+    public void run(String... args) {  //Uygulama ayağa kalkınca otomatik çalışır
+
+        if (userRepository.existsByUsername(adminUsername)) {
             return;
         }
 
         User admin = new User();
-        admin.setUsername("admin");
-        admin.setPassword(passwordService.hash("admin12345"));
+        admin.setUsername(adminUsername);
+        admin.setPassword(passwordService.hash(adminPassword));
         admin.setRole(Role.ADMIN);
 
         userRepository.save(admin);

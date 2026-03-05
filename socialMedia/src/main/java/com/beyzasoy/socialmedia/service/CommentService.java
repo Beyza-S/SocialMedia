@@ -37,8 +37,8 @@ public class CommentService {
 
         Comment comment = new Comment();
         comment.setCommentContent(content);
-        comment.setCommentUser(user);
-        comment.setCommentPost(post);
+        comment.setCommentUser(user); //Yorumu yazan kişi
+        comment.setCommentPost(post); //Yorum hangi posta yapıldı
 
         commentRepository.save(comment);
     }
