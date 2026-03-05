@@ -34,6 +34,7 @@ public class PostService {
         postRepository.save(post);
     }
 
+    //Sadece veri gösterir başka işlem yapmaz
     @Transactional(readOnly = true)
     public List<PostResponse> getAllPosts() {
 
