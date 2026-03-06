@@ -112,7 +112,7 @@ POST /api/auth/signup
 }
 ```
 
-#### Login
+#### 🔓 Login
 ```
 POST /api/auth/login
 ```
@@ -130,10 +130,6 @@ POST /api/auth/login
 }
 ```
 
-#### Logout
-```
-POST /api/auth/logout
-```
 
 #### Aktif Kullanıcı Bilgisi
 ```
@@ -265,6 +261,12 @@ DELETE /api/posts/{id}/likes
 ```
 
 ---
+
+
+#### ➜🚪 Logout
+```
+POST /api/auth/logout
+```
 
 ## 🔒 Token Kullanımı
 
