@@ -274,6 +274,58 @@ Bu projede kimlik doğrulama Spring Security kullanılmadan uygulanmıştır. Lo
 
 ---
 
+# 📊 API Kullanım Akışları
+
+## 1. Kullanıcı Kayıt ve Giriş Akışı
+
+1. Kullanıcı `/api/auth/signup` endpointi ile sisteme kayıt olur.
+2. Ardından `/api/auth/login` endpointi ile giriş yapar.
+3. Sistem kullanıcı için bir access token üretir.
+4. Kullanıcı bu token'ı `Authorization: Bearer <token>` header'ı ile göndererek korumalı endpointlere erişebilir.
+
+## 2. Post Paylaşma Akışı
+
+1. Kullanıcı login olur ve access token alır.
+2. `/api/posts` endpointine POST isteği göndererek yeni bir post oluşturur.
+3. Sistem token doğrulaması yapar.
+4. Post veritabanına kaydedilir ve kullanıcı ile ilişkilendirilir.
+
+## 3. Post Beğenme Akışı
+
+1. Kullanıcı login olur.
+2. `/api/posts/{id}/likes` endpointine POST isteği gönderir.
+3. Sistem kullanıcının daha önce bu postu beğenip beğenmediğini kontrol eder.
+4. Eğer beğeni yoksa like kaydı oluşturulur.
+
+## 4. Yorum Ekleme Akışı
+
+1. Kullanıcı `/api/posts/{id}/comments` endpointine yorum gönderir.
+2. Sistem token doğrulaması yapar.
+3. Yorum ilgili post ile ilişkilendirilerek veritabanına kaydedilir.
+
+## 5. Admin Kullanıcı Silme Akışı
+
+1. ADMIN rolüne sahip kullanıcı login olur.
+2. `/api/admin/users/{id}` endpointine DELETE isteği gönderir.
+3. Sistem admin yetkisini kontrol eder.
+4. İlgili kullanıcı sistemden silinir.
+   
+## 6. Post Görüntüleme Akışı
+
+1. Kullanıcı `/api/posts/{id}` endpointi ile bir postun detaylarını görüntüler.
+2. Alternatif olarak `/api/posts/{id}/view` endpointi çağrılarak görüntülenme sayısı artırılır.
+3. Sistem token doğrulaması yapar.
+4. Postun `viewCount` değeri 1 artırılır.
+
+## 7. Logout Akışı
+
+1. Kullanıcı `/api/auth/logout` endpointini çağırır.
+2. Sistem kullanıcının aktif token'ını geçersiz hale getirir.
+3. Bu token ile artık korumalı endpointlere erişim sağlanamaz.
+
+---
+
+
 ## ⚠️ Varsayımlar ve Kısıtlar
 
 - Bir `username` sadece bir kez kullanılabilir.
