@@ -149,6 +149,12 @@ GET /api/users/{id}
 ```
 PUT /api/users/me/password
 ```
+```json
+{
+  "currentPassword": "user123",
+  "newPassword": "user1234"
+}
+```
 
 #### Kendi Hesabını Sil
 ```
